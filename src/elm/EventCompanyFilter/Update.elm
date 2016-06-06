@@ -4,12 +4,17 @@ import EventCompanyFilter.Model as EventCompanyFilter exposing (initialModel, Mo
 
 import Company.Model as Company exposing (Model)
 
+import CompanyChangeCounter.Update exposing (Action)
+
+
 
 init : Model
 init = initialModel
 
 type Action
   = SelectCompany (Maybe Int)
+  -- Child Action
+   | ChildCompanyChangeCounterAction CompanyChangeCounter.Update.Action
 
 type alias Model = EventCompanyFilter.Model
 
@@ -35,3 +40,5 @@ update companies action model =
               Nothing
       in
         eventCompanyFilter
+    ChildCompanyChangeCounterAction act->
+      CompanyChangeCounter.Update.update act

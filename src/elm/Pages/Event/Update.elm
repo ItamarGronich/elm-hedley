@@ -8,6 +8,7 @@ import Event.Decoder exposing (decode)
 import Event.Model exposing (Event)
 import EventAuthorFilter.Update exposing (Action)
 import EventCompanyFilter.Update exposing (Action)
+import CompanyChangeCounter.Update exposing (Action)
 import EventList.Update exposing (Action)
 import EventList.Utils exposing (filterEventsByString)
 import Http exposing (Error)
@@ -76,6 +77,11 @@ update context action model =
           case act of
             EventCompanyFilter.Update.SelectCompany maybeCompanyId ->
               maybeCompanyId
+            EventCompanyFilter.Update.ChildCompanyChangeCounterAction act ->
+              case act of
+                CompanyChangeCounter.Update.Count maybeCompanyId ->
+                  maybeCompanyId
+
 
       in
         ( { model | eventCompanyFilter = childModel }
