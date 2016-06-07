@@ -34,11 +34,11 @@ update companies action model =
             Just val ->
               -- Make sure the given company ID is a valid one.
               if ((isValidCompany val) > 0)
-                then Just val
-                else Nothing
+                then { model | eventCompanyFilter = Just val }
+                else { model | eventCompanyFilter = Nothing }
             Nothing ->
-              Nothing
+               { model | eventCompanyFilter = Nothing }
       in
         eventCompanyFilter
     ChildCompanyChangeCounterAction act->
-      CompanyChangeCounter.Update.update act
+      { model | companyChangeCounter = model.companyChangeCounter + 1 }

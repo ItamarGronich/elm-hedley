@@ -31,10 +31,10 @@ view companies address model =
     ]
 
 companyListForSelect : Signal.Address EventCompanyFilter.Update.Action -> List Company.Model -> Model -> Html
-companyListForSelect address companies eventCompanyFilter  =
+companyListForSelect address companies model  =
   let
     selectedText =
-      case eventCompanyFilter of
+      case model.eventCompanyFilter of
         Just id -> toString id
         Nothing -> ""
 
@@ -56,7 +56,7 @@ companyListForSelect address companies eventCompanyFilter  =
 
     -- The selected company ID.
     selectedId =
-      case eventCompanyFilter of
+      case model.eventCompanyFilter of
         Just id ->
           id
         Nothing ->
@@ -73,7 +73,7 @@ companyListForSelect address companies eventCompanyFilter  =
 
                     ]
              (List.map getOption companies')
-             , div [] [ (CompanyChangeCounter.View.view CompanyChangeCounter.Model.initialModel) ]
+             , div [] [ (CompanyChangeCounter.View.view model.companyChangeCounter) ]
       ]
 
 

@@ -1,6 +1,14 @@
 module EventCompanyFilter.Model where
 
-type alias Model = Maybe Int
+import CompanyChangeCounter.Model as CompanyChangeCounter exposing (initialModel, Model)
+
+type alias Model =
+  { eventCompanyFilter : Maybe Int
+  , companyChangeCounter : CompanyChangeCounter.Model
+  }
 
 initialModel : Model
-initialModel = Nothing
+initialModel =
+  { eventCompanyFilter = Nothing
+  , companyChangeCounter = CompanyChangeCounter.initialModel
+  }
